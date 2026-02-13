@@ -35,6 +35,26 @@ body::before{
     transition:0.5s;
 }
 
+/* FLOATING HEARTS */
+.heart{
+    position:fixed;
+    bottom:-20px;
+    font-size:20px;
+    animation:floatUp 6s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-100vh) scale(1.5);
+        opacity:0;
+    }
+}
+
 .page{
     position:absolute;
     width:100%;
@@ -173,6 +193,7 @@ body::before{
     text-shadow:0 0 20px #ff3366;
 }
 
+/* POPUP */
 #finalPopup{
     position:fixed;
     top:15%;
@@ -185,7 +206,7 @@ body::before{
     display:none;
     width:90%;
     max-width:420px;
-    background:black;
+    background:url('img/p2.jpg') center/cover no-repeat;
     color:white;
     box-shadow:0 0 40px rgba(255,0,100,0.6);
 }
@@ -265,7 +286,6 @@ body::before{
     </div>
 
     <div id="happyMessage">
-
         <div id="loveParagraph">
         Aksharam antoo raayadam modhalu pedithe adhi nee thone padhu...... 
         Alaanti aksharaalu chaalane raasanu.... 
@@ -277,7 +297,6 @@ body::before{
         <div id="valentineTitle">
         ❤️🌹 Happy Valentine’s Day Padhu 🌹❤️
         </div>
-
     </div>
 
 </div>
@@ -350,7 +369,23 @@ function closeFinalPopup(){
 
     happyMessage.style.display="block";
 
-    blurLayer.style.display="none";  // 🔥 REMOVE BLUR ONLY FOR FINAL PAGE
+    blurLayer.style.display="none";
+
+    startHearts();
+}
+
+/* HEART GENERATOR */
+function startHearts(){
+    setInterval(()=>{
+        const heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=(15+Math.random()*25)+"px";
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{heart.remove();},6000);
+    },300);
 }
 </script>
 
