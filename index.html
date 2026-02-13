@@ -124,8 +124,8 @@ body::before{
     top:5%;
     left:5%;
     width:45%;
-    font-size:clamp(18px,4vw,26px);
-    line-height:2;
+    font-size:clamp(16px,3.5vw,22px); /* reduced size */
+    line-height:1.9;
     text-align:left;
     color:white;
     font-weight:500;
@@ -188,7 +188,7 @@ body::before{
     position:absolute;
     font-size:22px;
     animation:fall 3s linear forwards;
-    pointer-events:none; /* FIX */
+    pointer-events:none;
 }
 @keyframes fall{
     0%{transform:translateY(-50px) rotate(0deg);}
@@ -212,8 +212,6 @@ body::before{
     background:black;
     color:white;
     box-shadow:0 0 40px rgba(255,0,100,0.6);
-    will-change:transform;           /* FIX */
-    backface-visibility:hidden;      /* FIX */
 }
 
 #finalPopup button{
@@ -279,13 +277,13 @@ body::before{
     <img src="img/p6.jpg" alt="Love Image">
 
     <div id="finalText">
-        Anjaneyudi balam🔥💪...
-        Anna maata javadaatani Lakshmanudu⚔️...
-        Ichina maata kosam sainyanni ventesukochina Sugreevudu🛡️🐒...
-        Veellandarini thisukuni Seetha kosam antha dooram velladu Raamudu🏹...
-        naku veellu yevaru lekapoina, naa Seetha kosam💖 yentha dooramina velthanu🚶‍♂️🌍...
+        🌿 Vanavaaasam inaa parledhu ani Seetha Raamuni pakkana nadichindhi... 🏹👑<br><br>
+        🔱 Paarvathi prema kosam Shivudu vairagyam vadilesi Ardhanaariswarudu ayyadu... 🕉️💞<br><br>
+        🎻 Raathalo leni Radhanu lokam kosam vadilesina, hrudayam kosam yeppudu vadalledhu Krishnudu... 💙✨<br><br>
+        🗡️ Yudhalu, vanavaasalu, kastaalu anniti madhyalo Arjunudi chenthane nilichindhi Droupathi... 👑🔥
+
         <strong class="mainQuestion">
-            Please nuv naa Seethavi Avuthava?? 🤌🏻💖
+            Nuv yevarilaaa unnaa kudaa... nee pakkana nenu untaanu....nuvvu untavaa? 💖🔥
         </strong>
     </div>
 
@@ -309,7 +307,7 @@ body::before{
     </div>
 </div>
 
-<!-- ALERT -->
+<!-- ALERT (UNCHANGED EXACTLY SAME) -->
 <div id="finalPopup">
     <h3>💖 Padhu said YES! 💖</h3>
     <p>
@@ -335,7 +333,6 @@ const happyMessage=document.getElementById("happyMessage");
 
 let flowerInterval;
 
-/* PAGE1 NO RUN */
 function move(btn){
     btn.style.position="absolute";
     btn.style.left=Math.random()*(window.innerWidth-100)+"px";
@@ -344,7 +341,6 @@ function move(btn){
 document.getElementById("no1").onmouseover=
 document.getElementById("no1").ontouchstart=function(){move(this);}
 
-/* PAGE1 YES */
 document.getElementById("yes1").onclick=function(){
     page1.classList.add("hidden");
     page2.classList.remove("hidden");
@@ -352,20 +348,17 @@ document.getElementById("yes1").onclick=function(){
     setTimeout(()=>{ okBtn.disabled=false; },5000);
 }
 
-/* PAGE2 OK */
 okBtn.onclick=function(){
     page2.classList.add("hidden");
     page3.classList.remove("hidden");
     hearts();
 }
 
-/* PAGE3 NO */
 reject.onmouseover=reject.ontouchstart=function(){
     this.style.display="none";
     noTextAfterHover.style.display="block";
 }
 
-/* HEARTS */
 function hearts(){
     setInterval(()=>{
         const heart=document.createElement("div");
@@ -378,7 +371,6 @@ function hearts(){
     },300);
 }
 
-/* CONTINUOUS FLOWERS (FIXED) */
 function startCelebration(){
     flowerInterval=setInterval(()=>{
         const flower=document.createElement("div");
@@ -386,7 +378,7 @@ function startCelebration(){
         flower.innerHTML=Math.random()>0.5?"🌹":"🎉";
         flower.style.left=Math.random()*window.innerWidth+"px";
         flower.style.top="-20px";
-        page3.appendChild(flower);   /* FIX: body -> page3 */
+        page3.appendChild(flower);
         setTimeout(()=>flower.remove(),3000);
     },300);
 }
@@ -395,14 +387,12 @@ function stopCelebration(){
     clearInterval(flowerInterval);
 }
 
-/* ACCEPT */
 document.getElementById("accept").onclick=function(){
     finalPopup.style.display="block";
     page3.classList.add("blur-page");
     startCelebration();
 }
 
-/* CLOSE ALERT */
 function closeFinalPopup(){
     finalPopup.style.display="none";
     page3.classList.remove("blur-page");
@@ -419,7 +409,3 @@ function closeFinalPopup(){
 
 </body>
 </html>
-
-
-
-
