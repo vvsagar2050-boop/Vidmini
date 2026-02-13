@@ -101,7 +101,7 @@ body::before{
     flex-direction:column;
     gap:25px;
     align-items:flex-start;
-    text-align:left;   /* FIXED LEFT ALIGN */
+    text-align:left;
     color:white;
 }
 
@@ -130,7 +130,7 @@ body::before{
     display:none;
     font-weight:bold;
     font-size:clamp(16px,4vw,20px);
-    color:black;   /* BLACK COLOR AS REQUESTED */
+    color:black;
 }
 
 #proposalBtns{
@@ -147,14 +147,28 @@ body::before{
     background:black !important;
 }
 
-/* FINAL HAPPY MESSAGE (RESTORED STYLE) */
+/* FINAL MESSAGE SECTION */
 #happyMessage{
     display:none;
     margin-top:40px;
-    font-size:clamp(28px,6vw,50px);
-    color:white;
+    width:100%;
     text-align:center;
+}
+
+/* OXYGEN TEXT STYLE */
+#loveParagraph{
+    font-size:clamp(18px,4vw,26px);
+    line-height:1.9;
+    margin-bottom:25px;
+    color:white;
+    text-shadow:0 0 15px rgba(255,0,100,0.6);
+}
+
+/* HAPPY VALENTINE STYLE */
+#valentineTitle{
+    font-size:clamp(28px,6vw,50px);
     font-weight:bold;
+    color:white;
     text-shadow:0 0 20px #ff3366;
 }
 
@@ -205,7 +219,7 @@ body::before{
 <!-- PAGE 1 -->
 <div id="page1" class="page">
     <h1>Padhu, Will You Be My Valentine? ❤️</h1>
-    <h2>YES cheppalo NO cheppalo theliyatledhaa... NO button ni pattukooo 😜</h2>
+    <h2>YES cheppalo NO cheppalo theliyatledhaa... ithe first NO button ni velli pattukooo...pattukundaam ante dorakkunda paaripothundaa....ithe 😜</h2> 
     <div>
         <button id="yes1" class="btn">Yes 💖</button>
         <button id="no1" class="btn">No 😜</button>
@@ -215,8 +229,7 @@ body::before{
 <!-- PAGE 2 -->
 <div id="page2" class="page hidden">
     <h2>
-        hloo kangaru ipoku... naalo vibrations yekkuvaipoyay..
-        vibrations vachaay kadaaa marii inkendhuku alochistunnav...
+        hloo kangaru ipoku... naalo vibrations yekkuvaipoyay..andhuke nee phone ki konni vibrations pampinchaanu.....vibrations vachaay kadaaa marii inkendhuku alochistunnav velli 'okay' ni hug chesukoooo... 😌 
     </h2>
     <button id="okBtn" class="btn" disabled>OKAY 😌</button>
 </div>
@@ -229,11 +242,11 @@ body::before{
     <div id="finalText">
         🌿 Vanavaaasam inaa parledhu ani Seetha Raamuni pakkana nadichindhi...<br>
         🔱 Paarvathi prema kosam Shivudu vairagyam vadilesi Ardhanaariswarudu ayyadu...<br>
-        🎻 Radhanu lokam kosam vadilesina Krishnudu...<br>
-        🗡️ Yudhalu madhyalo Arjunudi pakkane nilichindhi Droupathi...<br><br>
+        🎻 Raathalo leni Radhanu lokam kosam vadilesina, hrudayam kosam yeppudu vadalledhu Krishnudu...<br>
+        🗡️ Yudhalu, vanavaasalu, kastaalu anniti madhyalo Arjunudi chenthane nilichindhi Droupathi... 👑<br><br>
 
         <strong>
-            Nuv yevarilaaa unnaa kudaa... nee pakkana nenu untaanu....
+            Nuv yevarilaaa unnaa kudaa.nee pakkana nenu untaanu.... 
             nuvvu untavaa? 💖🔥
         </strong>
     </div>
@@ -252,8 +265,21 @@ body::before{
         <button id="reject" class="btn">No 😜</button>
     </div>
 
+    <!-- FINAL SECTION -->
     <div id="happyMessage">
+
+        <div id="loveParagraph">
+        Aksharam antoo raayadam modhalu pedithe adhi nee thone padhu...... 
+        Alaanti aksharaalu chaalane raasanu.... 
+        Inkaa raastoone unnnanu...... 
+        naa life lo yemainaaa sampaadinchochemo kaani nenu yeppatiki sampadinchaleni aasthi...padhu..... 
+        i la la la my ardha ratri rendu gantala oxygen...
+        </div>
+
+        <div id="valentineTitle">
         ❤️🌹 Happy Valentine’s Day Padhu 🌹❤️
+        </div>
+
     </div>
 
 </div>
