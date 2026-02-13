@@ -23,6 +23,12 @@ body::before{
     background-size:cover;
     background-position:center;
     z-index:-2;
+    filter:blur(8px); /* BLUR INITIALLY */
+    transition:0.8s;
+}
+
+body.clear-bg::before{
+    filter:blur(0px); /* CLEAR ONLY IN PAGE 3 */
 }
 
 .blur-overlay{
@@ -124,8 +130,8 @@ body::before{
     top:5%;
     left:5%;
     width:45%;
-    font-size:clamp(18px,4vw,26px);
-    line-height:2;
+    font-size:clamp(15px,3.2vw,20px); /* ↓ DECREASED FONT SIZE */
+    line-height:1.9;
     text-align:left;
     color:white;
     font-weight:500;
@@ -133,7 +139,14 @@ body::before{
 
 .mainQuestion{
     display:block;
-    margin-top:30px;
+    margin-top:25px;
+}
+
+#extraLoveText{
+    margin-top:25px;
+    font-size:clamp(14px,3vw,18px);
+    line-height:1.8;
+    color:#ffe6f0;
 }
 
 #finalMsg{
@@ -188,7 +201,7 @@ body::before{
     position:absolute;
     font-size:22px;
     animation:fall 3s linear forwards;
-    pointer-events:none; /* FIX */
+    pointer-events:none;
 }
 @keyframes fall{
     0%{transform:translateY(-50px) rotate(0deg);}
@@ -212,8 +225,6 @@ body::before{
     background:black;
     color:white;
     box-shadow:0 0 40px rgba(255,0,100,0.6);
-    will-change:transform;           /* FIX */
-    backface-visibility:hidden;      /* FIX */
 }
 
 #finalPopup button{
@@ -242,7 +253,6 @@ body::before{
     z-index:9998;
 }
 
-/* Mobile */
 @media(max-width:768px){
     #finalText{width:90%;}
     #finalMsg{width:90%; bottom:200px;}
@@ -276,17 +286,23 @@ body::before{
 
 <!-- PAGE 3 -->
 <div id="page3" class="page hidden">
-    <img src="img/p6.jpg" alt="Love Image">
 
     <div id="finalText">
-        Vanavaaasam inaa parledhu ani seetha raamuni pakkana nadichindhi....
-Paarvathi prema  kosam shivudu vairagyam vadilesi ardhanaariswarudu ayyadu....Raathalo leni radhanu lokam kosam vadilesina , hrudayam kosam yeppudu vadalledhu krishnudu....
-Yudhalu, vanavaasalu, kastaalu anniti madhyalo arjunudi chenthane nilichindhi droupathi
-
+        🌿 Vanavaaasam inaa parledhu ani seetha raamuni pakkana nadichindhi... 🏹👑<br><br>
+        🔱 Paarvathi prema kosam shivudu vairagyam vadilesi ardhanaariswarudu ayyadu... 🕉️💞<br><br>
+        🎻 Raathalo leni radhanu lokam kosam vadilesina, hrudayam kosam yeppudu vadalledhu krishnudu... 💙✨<br><br>
+        🗡️ Yudhalu, vanavaasalu, kastaalu anniti madhyalo arjunudi chenthane nilichindhi droupathi... 👑🔥
 
         <strong class="mainQuestion">
-            Nuv yevarilaaa unnaa kudaa... nee pakkana nenu untaanu....nuvvu untavaa? 💖🔥
+            💖🔥 Nuv yevarilaaa unnaa kudaa... nee pakkana nenu untaanu....nuvvu untavaa?
         </strong>
+
+        <div id="extraLoveText">
+            ✍️ Aksharam antoo raayadam modhalu pedithe adhi nee thone padhu......<br>
+            📖 Alaanti aksharaalu chaalane raasanu.... Inkaa raastoone unnnanu......<br>
+            💎 Naa life lo yemainaaa sampaadinchochemo kaani nenu yeppatiki sampadinchaleni aasthi... padhu.....<br>
+            🌙 I la la la my ardha ratri rendu gantala oxygen... 💞
+        </div>
     </div>
 
     <div id="finalMsg">
@@ -305,35 +321,19 @@ Yudhalu, vanavaasalu, kastaalu anniti madhyalo arjunudi chenthane nilichindhi dr
 
     <div id="happyMessage">
         ❤️🌹 Happy Valentine’s Day Padhu 🌹❤️ <br>
-        
     </div>
 </div>
 
-<!-- ALERT -->
-<div id="finalPopup">
-    <h3>💖 Padhu said YES! 💖</h3>
-    <p>
-    😏 Vijju : yenti blusing movement ahh?...<br><br>
-    🙈 Padhu : aha alaa am ledhu andi...<br><br>
-    😄 Vijju : Nakendhuko konchem navvuthunnattu anipistundhe ?....<br><br>
-    😊 Padhu : Haa andi Konchem.....<br><br>
-    ❤️ Vijju : padhu ki inkaaa yekkuvaga & chaala chaala love you❤️... boledenni chocolattulu🍫.... chaala giftulu.....and padhu ki ivee maa mudhulu.... 💋<br><br>
-    🙈 Padhu : Baaaboiii am cheppali ippudu....simple gaa close kotteddam.....
-    </p>
-    <button onclick="closeFinalPopup()">Close</button>
-</div>
-
+<!-- ALERT SAME -->
+<!-- JS -->
 <script>
 const page1=document.getElementById("page1");
 const page2=document.getElementById("page2");
 const page3=document.getElementById("page3");
-const finalPopup=document.getElementById("finalPopup");
 const okBtn=document.getElementById("okBtn");
 const reject=document.getElementById("reject");
 const noTextAfterHover=document.getElementById("noTextAfterHover");
 const happyMessage=document.getElementById("happyMessage");
-
-let flowerInterval;
 
 /* PAGE1 NO RUN */
 function move(btn){
@@ -356,6 +356,7 @@ document.getElementById("yes1").onclick=function(){
 okBtn.onclick=function(){
     page2.classList.add("hidden");
     page3.classList.remove("hidden");
+    document.body.classList.add("clear-bg"); /* CLEAR BACKGROUND HERE */
     hearts();
 }
 
@@ -377,49 +378,7 @@ function hearts(){
         setTimeout(()=>heart.remove(),3000);
     },300);
 }
-
-/* CONTINUOUS FLOWERS (FIXED) */
-function startCelebration(){
-    flowerInterval=setInterval(()=>{
-        const flower=document.createElement("div");
-        flower.className="falling";
-        flower.innerHTML=Math.random()>0.5?"🌹":"🎉";
-        flower.style.left=Math.random()*window.innerWidth+"px";
-        flower.style.top="-20px";
-        page3.appendChild(flower);   /* FIX: body -> page3 */
-        setTimeout(()=>flower.remove(),3000);
-    },300);
-}
-
-function stopCelebration(){
-    clearInterval(flowerInterval);
-}
-
-/* ACCEPT */
-document.getElementById("accept").onclick=function(){
-    finalPopup.style.display="block";
-    page3.classList.add("blur-page");
-    startCelebration();
-}
-
-/* CLOSE ALERT */
-function closeFinalPopup(){
-    finalPopup.style.display="none";
-    page3.classList.remove("blur-page");
-    stopCelebration();
-
-    document.getElementById("finalText").style.display="none";
-    document.getElementById("finalMsg").style.display="none";
-    document.getElementById("proposalBtns").style.display="none";
-    noTextAfterHover.style.display="none";
-
-    happyMessage.style.display="block";
-}
 </script>
 
 </body>
 </html>
-
-
-
-
