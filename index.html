@@ -34,7 +34,7 @@ body::before{
     z-index:-1;
 }
 
-/* PAGE COMMON */
+/* COMMON */
 .page{
     position:absolute;
     width:100%;
@@ -56,6 +56,14 @@ body::before{
     filter:blur(8px);
 }
 
+.btn{
+    padding:12px 25px;
+    font-size:clamp(14px,4vw,18px);
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
 /* PAGE 1 */
 #page1 h1{
     font-size:clamp(26px,6vw,46px);
@@ -67,37 +75,28 @@ body::before{
     margin-bottom:30px;
 }
 
-.btn{
-    padding:12px 25px;
-    font-size:clamp(14px,4vw,18px);
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-}
-
 #buttonGroup{
     position:relative;
-    width:220px;
-    height:60px;
+    width:260px;
+    height:70px;
 }
 
 #yes1{
     background:#ff3366;
     color:white;
     position:absolute;
-    left:0;
+    left:10px;
 }
 #no1{
     background:black;
     color:white;
     position:absolute;
-    right:0;
+    right:10px;
 }
 
 /* PAGE 2 */
 #page2 h2{
     font-size:clamp(18px,4.5vw,26px);
-    color:black;
     max-width:700px;
     text-shadow:0 0 10px red;
 }
@@ -120,17 +119,13 @@ body::before{
 }
 
 /* TEXT */
-#finalText,#finalMsg,#noTextAfterHover{
-    text-shadow:1px 1px 4px rgba(0,0,0,0.7);
-}
-
 #finalText{
     position:absolute;
     top:5%;
     left:5%;
     width:45%;
     font-size:clamp(15px,3.5vw,20px);
-    line-height:1.9;
+    line-height:1.8;
     text-align:left;
     color:white;
 }
@@ -143,20 +138,18 @@ body::before{
 
 #finalMsg{
     position:absolute;
-    bottom:220px;
+    bottom:260px;
     left:5%;
     width:45%;
-    font-size:clamp(15px,4vw,20px);
     font-weight:bold;
     color:white;
 }
 
 #noTextAfterHover{
     position:absolute;
-    bottom:170px;
+    bottom:230px;
     left:5%;
     width:45%;
-    font-size:clamp(15px,4vw,20px);
     font-weight:bold;
     color:black;
     display:none;
@@ -164,10 +157,10 @@ body::before{
 
 #proposalBtns{
     position:absolute;
-    bottom:120px;
+    bottom:180px;
     left:5%;
     display:flex;
-    gap:8px;
+    gap:10px;
 }
 #proposalBtns .btn{
     background:#ff3366;
@@ -175,33 +168,32 @@ body::before{
 }
 #reject{background:black !important;}
 
-/* EXTRA LOVE TEXT */
 #extraLoveText{
     position:absolute;
-    bottom:60px;
+    bottom:100px;
     left:5%;
     width:90%;
     color:white;
     font-size:clamp(14px,3.5vw,18px);
     line-height:1.7;
     text-align:left;
-    text-shadow:1px 1px 4px rgba(0,0,0,0.7);
 }
 
 #happyMessage{
     position:absolute;
-    bottom:20px;
+    bottom:30px;
     left:5%;
-    font-size:clamp(18px,5vw,26px);
+    font-size:clamp(20px,5vw,28px);
     color:white;
     font-weight:bold;
     text-shadow:0 0 20px #ff3366;
+    display:none;
 }
 
 /* HEARTS */
 .heart{
     position:absolute;
-    font-size:clamp(20px,5vw,28px);
+    font-size:24px;
     animation:float 3s linear forwards;
 }
 @keyframes float{
@@ -214,14 +206,13 @@ body::before{
     position:absolute;
     font-size:22px;
     animation:fall 3s linear forwards;
-    pointer-events:none;
 }
 @keyframes fall{
     0%{transform:translateY(-50px) rotate(0deg);}
     100%{transform:translateY(100vh) rotate(360deg);}
 }
 
-/* ALERT */
+/* POPUP */
 #finalPopup{
     position:fixed;
     top:10%;
@@ -229,15 +220,12 @@ body::before{
     transform:translateX(-50%);
     padding:25px;
     border-radius:20px;
-    text-align:left;
-    font-size:16px;
-    z-index:9999;
-    display:none;
     width:90%;
     max-width:420px;
     background:black;
     color:white;
-    box-shadow:0 0 40px rgba(255,0,100,0.6);
+    display:none;
+    z-index:9999;
 }
 #finalPopup button{
     margin-top:20px;
@@ -246,17 +234,14 @@ body::before{
     border-radius:8px;
     background:#ff3366;
     color:white;
-    font-weight:bold;
-    cursor:pointer;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-    #finalText{width:90%;top:5%;}
-    #finalMsg{width:90%;bottom:260px;}
-    #noTextAfterHover{width:90%;bottom:220px;}
-    #proposalBtns{bottom:170px;}
-    #extraLoveText{bottom:90px;width:90%;}
+    #finalText,#finalMsg,#noTextAfterHover{
+        width:90%;
+        left:5%;
+    }
 }
 </style>
 </head>
@@ -286,7 +271,7 @@ body::before{
 
 <!-- PAGE 3 -->
 <div id="page3" class="page hidden">
-    <img src="img/p6.jpg" alt="Love Image">
+    <img src="img/p6.jpg">
 
     <div id="finalText">
         🌿 Vanavaaasam inaa parledhu ani Seetha Raamuni pakkana nadichindhi... 🏹👑<br>
@@ -321,7 +306,7 @@ body::before{
     </div>
 </div>
 
-<!-- ALERT -->
+<!-- POPUP -->
 <div id="finalPopup">
     <h3>💖 Padhu said YES! 💖</h3>
     <p>
@@ -336,19 +321,81 @@ body::before{
 </div>
 
 <script>
+const page1=document.getElementById("page1");
+const page2=document.getElementById("page2");
+const page3=document.getElementById("page3");
+const okBtn=document.getElementById("okBtn");
+const finalPopup=document.getElementById("finalPopup");
+const happyMessage=document.getElementById("happyMessage");
+const reject=document.getElementById("reject");
+const noTextAfterHover=document.getElementById("noTextAfterHover");
+
+/* RUNNING NO BUTTON */
 function move(btn){
-    btn.style.left=Math.random()*(window.innerWidth-120)+"px";
-    btn.style.top=Math.random()*(window.innerHeight-60)+"px";
+    const parent=document.getElementById("buttonGroup");
+    const maxX=parent.clientWidth-100;
+    const maxY=parent.clientHeight-40;
+    btn.style.left=Math.random()*maxX+"px";
+    btn.style.top=Math.random()*maxY+"px";
 }
 document.getElementById("no1").addEventListener("mouseover",function(){move(this);});
 document.getElementById("no1").addEventListener("touchstart",function(){move(this);});
 
+/* PAGE FLOW */
 document.getElementById("yes1").onclick=function(){
     page1.classList.add("hidden");
     page2.classList.remove("hidden");
-    if(navigator.vibrate){ navigator.vibrate(5000); }
-    setTimeout(()=>{ okBtn.disabled=false; },5000);
+    if(navigator.vibrate){navigator.vibrate(3000);}
+    setTimeout(()=>{okBtn.disabled=false;},3000);
 };
+
+okBtn.onclick=function(){
+    page2.classList.add("hidden");
+    page3.classList.remove("hidden");
+    startHearts();
+};
+
+reject.onmouseover=reject.ontouchstart=function(){
+    this.style.display="none";
+    noTextAfterHover.style.display="block";
+};
+
+document.getElementById("accept").onclick=function(){
+    finalPopup.style.display="block";
+    page3.classList.add("blur-page");
+    startCelebration();
+};
+
+function closeFinalPopup(){
+    finalPopup.style.display="none";
+    page3.classList.remove("blur-page");
+    happyMessage.style.display="block";
+}
+
+/* HEARTS */
+function startHearts(){
+    setInterval(()=>{
+        const heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*window.innerWidth+"px";
+        heart.style.bottom="0px";
+        page3.appendChild(heart);
+        setTimeout(()=>heart.remove(),3000);
+    },400);
+}
+
+/* CELEBRATION */
+function startCelebration(){
+    setInterval(()=>{
+        const flower=document.createElement("div");
+        flower.className="falling";
+        flower.innerHTML=Math.random()>0.5?"🌹":"🎉";
+        flower.style.left=Math.random()*window.innerWidth+"px";
+        page3.appendChild(flower);
+        setTimeout(()=>flower.remove(),3000);
+    },300);
+}
 </script>
 
 </body>
