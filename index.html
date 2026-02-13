@@ -95,12 +95,13 @@ body::before{
     width:100%;
     height:100%;
     overflow-y:auto;
-    padding:60px 20px 100px;
+    padding:60px 20px 120px;
     box-sizing:border-box;
     display:flex;
     flex-direction:column;
     gap:25px;
     align-items:flex-start;
+    text-align:left;   /* FIXED LEFT ALIGN */
     color:white;
 }
 
@@ -125,6 +126,13 @@ body::before{
     font-size:clamp(16px,4vw,20px);
 }
 
+#noTextAfterHover{
+    display:none;
+    font-weight:bold;
+    font-size:clamp(16px,4vw,20px);
+    color:black;   /* BLACK COLOR AS REQUESTED */
+}
+
 #proposalBtns{
     display:flex;
     gap:10px;
@@ -139,13 +147,15 @@ body::before{
     background:black !important;
 }
 
-/* HAPPY MESSAGE */
+/* FINAL HAPPY MESSAGE (RESTORED STYLE) */
 #happyMessage{
     display:none;
-    margin-top:30px;
-    font-size:clamp(18px,4vw,26px);
-    line-height:1.8;
-    font-weight:500;
+    margin-top:40px;
+    font-size:clamp(28px,6vw,50px);
+    color:white;
+    text-align:center;
+    font-weight:bold;
+    text-shadow:0 0 20px #ff3366;
 }
 
 /* POPUP */
@@ -195,8 +205,7 @@ body::before{
 <!-- PAGE 1 -->
 <div id="page1" class="page">
     <h1>Padhu, Will You Be My Valentine? ❤️</h1>
-    <h2>YES cheppalo NO cheppalo theliyatledhaa...Ithe Firstu 'NO' button ni velli pattukooo... pattukundaam ante dorakkundaa Paaripothundaa.....ithe 😜</h2>
-
+    <h2>YES cheppalo NO cheppalo theliyatledhaa... NO button ni pattukooo 😜</h2>
     <div>
         <button id="yes1" class="btn">Yes 💖</button>
         <button id="no1" class="btn">No 😜</button>
@@ -206,10 +215,9 @@ body::before{
 <!-- PAGE 2 -->
 <div id="page2" class="page hidden">
     <h2>
-        hloo kangaru ipoku... naalo vibrations yekkuvaipoyay..andhuke nee phone ki konni vibrations pampinchaanu.....  
-        vibrations vachaay kadaaa marii inkendhuku alochistunnav velli 'okay' ni hug chesukoooo... 😌
+        hloo kangaru ipoku... naalo vibrations yekkuvaipoyay..
+        vibrations vachaay kadaaa marii inkendhuku alochistunnav...
     </h2>
-
     <button id="okBtn" class="btn" disabled>OKAY 😌</button>
 </div>
 
@@ -222,7 +230,7 @@ body::before{
         🌿 Vanavaaasam inaa parledhu ani Seetha Raamuni pakkana nadichindhi...<br>
         🔱 Paarvathi prema kosam Shivudu vairagyam vadilesi Ardhanaariswarudu ayyadu...<br>
         🎻 Radhanu lokam kosam vadilesina Krishnudu...<br>
-        🗡️ Yudhalu madhyalo Arjunudi pakkane nilichindhi Droupathi...<br>
+        🗡️ Yudhalu madhyalo Arjunudi pakkane nilichindhi Droupathi...<br><br>
 
         <strong>
             Nuv yevarilaaa unnaa kudaa... nee pakkana nenu untaanu....
@@ -230,36 +238,27 @@ body::before{
         </strong>
     </div>
 
-     <div id="finalMsg">
+    <div id="finalMsg">
         Please Padhu oppukovachu kadaa.... 😇  
         Oppukokapothe neeku dammunte 'No' meeda cheyyi vesi chudu 😜
     </div>
-     <div id="noTextAfterHover">
+
+    <div id="noTextAfterHover">
         No meeda cheyyi vesthe miss ipoyindha.... ithe......
     </div>
-
 
     <div id="proposalBtns">
         <button id="accept" class="btn">Yes 💍</button>
         <button id="reject" class="btn">No 😜</button>
     </div>
 
-    <!-- FINAL OXYGEN TEXT (SHOWS AFTER CLOSE) -->
     <div id="happyMessage">
-       
-
-        Aksharam antoo raayadam modhalu pedithe adhi nee thone padhu...... 
-        Alaanti aksharaalu chaalane raasanu.... 
-        Inkaa raastoone unnnanu...... 
-        naa life lo yemainaaa sampaadinchochemo kaani nenu yeppatiki sampadinchaleni  aasthi...padhu..... 
-        i la la la my ardha ratri rendu gantala oxygen...<br><br>
-
-         ❤️🌹 Happy Valentine’s Day Padhu 🌹❤️ 
+        ❤️🌹 Happy Valentine’s Day Padhu 🌹❤️
     </div>
 
 </div>
 
-<!-- FULL POPUP CONVERSATION RESTORED -->
+<!-- POPUP -->
 <div id="finalPopup">
     <h3>💖 Padhu said YES! 💖</h3>
     <p>
@@ -273,7 +272,6 @@ body::before{
     <button onclick="closeFinalPopup()">Close</button>
 </div>
 
-
 <script>
 
 const page1=document.getElementById("page1");
@@ -282,12 +280,15 @@ const page3=document.getElementById("page3");
 const finalPopup=document.getElementById("finalPopup");
 const okBtn=document.getElementById("okBtn");
 const happyMessage=document.getElementById("happyMessage");
+const reject=document.getElementById("reject");
+const noTextAfterHover=document.getElementById("noTextAfterHover");
 
 function move(btn){
     btn.style.position="absolute";
     btn.style.left=Math.random()*(window.innerWidth-100)+"px";
     btn.style.top=Math.random()*(window.innerHeight-50)+"px";
 }
+
 document.getElementById("no1").onmouseover=
 document.getElementById("no1").ontouchstart=function(){move(this);}
 
@@ -303,6 +304,11 @@ okBtn.onclick=function(){
     page3.classList.remove("hidden");
 }
 
+reject.onmouseover=reject.ontouchstart=function(){
+    this.style.display="none";
+    noTextAfterHover.style.display="block";
+}
+
 document.getElementById("accept").onclick=function(){
     finalPopup.style.display="block";
     page3.classList.add("blur-page");
@@ -315,10 +321,9 @@ function closeFinalPopup(){
     document.getElementById("finalText").style.display="none";
     document.getElementById("finalMsg").style.display="none";
     document.getElementById("proposalBtns").style.display="none";
+    noTextAfterHover.style.display="none";
 
     happyMessage.style.display="block";
-
-    page3.scrollTo({top:page3.scrollHeight,behavior:"smooth"});
 }
 </script>
 
