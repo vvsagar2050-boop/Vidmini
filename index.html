@@ -23,7 +23,7 @@ body::before{
     z-index:-2;
 }
 
-/* BLUR OVERLAY (ALWAYS ACTIVE) */
+/* BLUR OVERLAY */
 .blur-overlay{
     position:fixed;
     width:100%;
@@ -31,7 +31,8 @@ body::before{
     background:rgba(0,0,0,0.3);
     backdrop-filter:blur(8px);
     z-index:-1;
-    pointer-events:none; /* IMPORTANT: allows buttons to work */
+    pointer-events:none;
+    transition:0.5s;
 }
 
 .page{
@@ -149,7 +150,6 @@ body::before{
     background:black !important;
 }
 
-/* FINAL MESSAGE SECTION */
 #happyMessage{
     display:none;
     margin-top:40px;
@@ -157,7 +157,6 @@ body::before{
     text-align:center;
 }
 
-/* OXYGEN TEXT STYLE */
 #loveParagraph{
     font-size:clamp(18px,4vw,26px);
     line-height:1.9;
@@ -167,7 +166,6 @@ body::before{
     text-shadow:0 0 15px rgba(255,0,100,0.6);
 }
 
-/* HAPPY VALENTINE STYLE */
 #valentineTitle{
     font-size:clamp(28px,6vw,50px);
     font-weight:bold;
@@ -175,7 +173,6 @@ body::before{
     text-shadow:0 0 20px #ff3366;
 }
 
-/* POPUP */
 #finalPopup{
     position:fixed;
     top:15%;
@@ -203,7 +200,6 @@ body::before{
     font-weight:bold;
 }
 
-/* MOBILE */
 @media(max-width:768px){
     #finalText{
         width:100%;
@@ -217,7 +213,7 @@ body::before{
 
 <body>
 
-<div class="blur-overlay"></div>
+<div class="blur-overlay" id="blurLayer"></div>
 
 <!-- PAGE 1 -->
 <div id="page1" class="page">
@@ -310,6 +306,7 @@ const okBtn=document.getElementById("okBtn");
 const happyMessage=document.getElementById("happyMessage");
 const reject=document.getElementById("reject");
 const noTextAfterHover=document.getElementById("noTextAfterHover");
+const blurLayer=document.getElementById("blurLayer");
 
 function move(btn){
     btn.style.position="absolute";
@@ -352,6 +349,8 @@ function closeFinalPopup(){
     noTextAfterHover.style.display="none";
 
     happyMessage.style.display="block";
+
+    blurLayer.style.display="none";  // 🔥 REMOVE BLUR ONLY FOR FINAL PAGE
 }
 </script>
 
