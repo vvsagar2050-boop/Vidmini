@@ -23,6 +23,7 @@ body::before{
     z-index:-2;
 }
 
+/* BLUR OVERLAY (ALWAYS ACTIVE) */
 .blur-overlay{
     position:fixed;
     width:100%;
@@ -30,6 +31,7 @@ body::before{
     background:rgba(0,0,0,0.3);
     backdrop-filter:blur(8px);
     z-index:-1;
+    pointer-events:none; /* IMPORTANT: allows buttons to work */
 }
 
 .page{
@@ -160,7 +162,7 @@ body::before{
     font-size:clamp(18px,4vw,26px);
     line-height:1.9;
     margin-bottom:25px;
-    color:white;
+    color:black;
     text-shadow:0 0 15px rgba(255,0,100,0.6);
 }
 
@@ -265,7 +267,6 @@ body::before{
         <button id="reject" class="btn">No 😜</button>
     </div>
 
-    <!-- FINAL SECTION -->
     <div id="happyMessage">
 
         <div id="loveParagraph">
