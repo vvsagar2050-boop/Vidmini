@@ -23,14 +23,15 @@ body::before{
     background-size:cover;
     background-position:center;
     z-index:-2;
-    filter:blur(8px); /* BLUR INITIALLY */
+    filter:blur(8px);
     transition:0.8s;
 }
 
 body.clear-bg::before{
-    filter:blur(0px); /* CLEAR ONLY IN PAGE 3 */
+    filter:blur(0px);
 }
 
+/* IMPORTANT FIX */
 .blur-overlay{
     position:fixed;
     width:100%;
@@ -38,6 +39,7 @@ body.clear-bg::before{
     background:rgba(0,0,0,0.3);
     backdrop-filter:blur(8px);
     z-index:-1;
+    pointer-events:none;   /* FIXED CLICK ISSUE */
 }
 
 /* PAGE COMMON */
@@ -59,10 +61,6 @@ body.clear-bg::before{
     pointer-events:none;
 }
 
-.blur-page{
-    filter:blur(8px);
-}
-
 /* PAGE 1 */
 #page1 h1{
     font-size:clamp(26px,6vw,46px);
@@ -72,9 +70,6 @@ body.clear-bg::before{
 #page1 h2{
     font-size:clamp(16px,4vw,22px);
     margin-bottom:30px;
-}
-#page1 .btn{
-    margin:15px;
 }
 
 .btn{
@@ -94,96 +89,72 @@ body.clear-bg::before{
     max-width:700px;
     text-shadow:0 0 10px red;
 }
-#okBtn{
-    background:#ff3366;
-    color:white;
-}
-#okBtn:disabled{
-    background:gray;
-    cursor:not-allowed;
-}
+#okBtn{ background:#ff3366; color:white; }
+#okBtn:disabled{ background:gray; cursor:not-allowed; }
 
-/* PAGE 3 */
+/* ========================= */
+/* PAGE 3 CLEAN LAYOUT */
+/* ========================= */
+
 #page3{
-    position:relative;
-    width:100%;
-    height:100vh;
-    overflow:hidden;
-}
-#page3 img{
     position:absolute;
     width:100%;
     height:100%;
-    object-fit:cover;
-    z-index:-1;
-}
-
-/* TEXT */
-#finalText,
-#finalMsg,
-#noTextAfterHover{
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    overflow-y:auto;   /* SCROLL ENABLED */
+    padding:60px 20px 120px;
+    box-sizing:border-box;
+    align-items:flex-start;
+    justify-content:flex-start;
+    text-align:left;
 }
 
 #finalText{
-    position:absolute;
-    top:5%;
-    left:5%;
-    width:45%;
-    font-size:clamp(15px,3.2vw,20px); /* ↓ DECREASED FONT SIZE */
-    line-height:1.9;
-    text-align:left;
+    width:100%;
+    max-width:800px;
+    font-size:clamp(14px,4vw,20px);
+    line-height:1.6;
     color:white;
-    font-weight:500;
 }
 
 .mainQuestion{
     display:block;
-    margin-top:25px;
+    margin-top:18px;
+    font-weight:bold;
 }
 
 #extraLoveText{
-    margin-top:25px;
-    font-size:clamp(14px,3vw,18px);
-    line-height:1.8;
+    margin-top:18px;
+    font-size:clamp(13px,3.8vw,18px);
+    line-height:1.6;
     color:#ffe6f0;
 }
 
 #finalMsg{
-    position:absolute;
-    bottom:170px;
-    left:5%;
-    width:45%;
-    font-size:clamp(16px,4vw,20px);
+    margin-top:30px;
+    font-size:clamp(14px,4vw,18px);
     font-weight:bold;
     color:white;
 }
 
 #noTextAfterHover{
-    position:absolute;
-    bottom:120px;
-    left:5%;
-    width:45%;
-    font-size:clamp(16px,4vw,20px);
+    margin-top:15px;
+    font-size:clamp(14px,4vw,18px);
     font-weight:bold;
     color:black;
     display:none;
 }
 
 #proposalBtns{
-    position:absolute;
-    bottom:40px;
-    left:5%;
+    margin-top:25px;
     display:flex;
-    gap:8px;
+    gap:12px;
 }
+
 #proposalBtns .btn{
     background:#ff3366;
     color:white;
 }
-#reject{
-    background:black !important;
-}
+#reject{ background:black !important; }
 
 /* HEARTS */
 .heart{
@@ -196,18 +167,6 @@ body.clear-bg::before{
     100%{transform:translateY(-300px);opacity:0;}
 }
 
-/* FALLING FLOWERS */
-.falling{
-    position:absolute;
-    font-size:22px;
-    animation:fall 3s linear forwards;
-    pointer-events:none;
-}
-@keyframes fall{
-    0%{transform:translateY(-50px) rotate(0deg);}
-    100%{transform:translateY(100vh) rotate(360deg);}
-}
-
 /* ALERT */
 #finalPopup{
     position:fixed;
@@ -216,7 +175,6 @@ body.clear-bg::before{
     transform:translateX(-50%);
     padding:30px 25px;
     border-radius:20px;
-    text-align:left;
     font-size:16px;
     z-index:9999;
     display:none;
@@ -238,7 +196,6 @@ body.clear-bg::before{
     cursor:pointer;
 }
 
-/* HAPPY MESSAGE */
 #happyMessage{
     position:absolute;
     top:50%;
@@ -253,10 +210,14 @@ body.clear-bg::before{
     z-index:9998;
 }
 
+/* MOBILE */
 @media(max-width:768px){
-    #finalText{width:90%;}
-    #finalMsg{width:90%; bottom:200px;}
-    #noTextAfterHover{width:90%; bottom:150px;}
+    #page3{
+        padding:40px 15px 120px;
+    }
+    #proposalBtns{
+        flex-direction:row;
+    }
 }
 </style>
 </head>
@@ -278,7 +239,7 @@ body.clear-bg::before{
 <!-- PAGE 2 -->
 <div id="page2" class="page hidden">
     <h2>
-        hloo kangaru ... naalo vibrations yekkuvaipoyay..andhuke nee phone ki konni vibrations pampinchaanu.....  
+        hloo kangaru ... naalo vibrations yekkuvaipoyay..andhuke nee phone ki konni vibrations pampinchaanu.....
         vibrations vachaay kadaaa marii inkendhuku alochistunnav velli 'okay' ni hug chesukoooo... 😌
     </h2>
     <button id="okBtn" class="btn" disabled>OKAY 😌</button>
@@ -303,29 +264,27 @@ body.clear-bg::before{
             💎 Naa life lo yemainaaa sampaadinchochemo kaani nenu yeppatiki sampadinchaleni aasthi... padhu.....<br>
             🌙 I la la la my ardha ratri rendu gantala oxygen... 💞
         </div>
-    </div>
 
-    <div id="finalMsg">
-        Please Padhu oppukovachu kadaa.... 😇  
-        Oppukokapothe neeku dammunte 'No' meeda cheyyi vesi chudu 😜
-    </div>
+        <div id="finalMsg">
+            Please Padhu oppukovachu kadaa.... 😇<br>
+            Oppukokapothe neeku dammunte 'No' meeda cheyyi vesi chudu 😜
+        </div>
 
-    <div id="noTextAfterHover">
-        No meeda cheyyi vesthe miss ipoyindha.... ithe......
-    </div>
+        <div id="noTextAfterHover">
+            No meeda cheyyi vesthe miss ipoyindha.... ithe......
+        </div>
 
-    <div id="proposalBtns">
-        <button id="accept" class="btn">Yes 💍</button>
-        <button id="reject" class="btn">No 😜</button>
+        <div id="proposalBtns">
+            <button id="accept" class="btn">Yes 💍</button>
+            <button id="reject" class="btn">No 😜</button>
+        </div>
     </div>
 
     <div id="happyMessage">
-        ❤️🌹 Happy Valentine’s Day Padhu 🌹❤️ <br>
+        ❤️🌹 Happy Valentine’s Day Padhu 🌹❤️
     </div>
 </div>
 
-<!-- ALERT SAME -->
-<!-- JS -->
 <script>
 const page1=document.getElementById("page1");
 const page2=document.getElementById("page2");
@@ -333,9 +292,7 @@ const page3=document.getElementById("page3");
 const okBtn=document.getElementById("okBtn");
 const reject=document.getElementById("reject");
 const noTextAfterHover=document.getElementById("noTextAfterHover");
-const happyMessage=document.getElementById("happyMessage");
 
-/* PAGE1 NO RUN */
 function move(btn){
     btn.style.position="absolute";
     btn.style.left=Math.random()*(window.innerWidth-100)+"px";
@@ -344,7 +301,6 @@ function move(btn){
 document.getElementById("no1").onmouseover=
 document.getElementById("no1").ontouchstart=function(){move(this);}
 
-/* PAGE1 YES */
 document.getElementById("yes1").onclick=function(){
     page1.classList.add("hidden");
     page2.classList.remove("hidden");
@@ -352,21 +308,18 @@ document.getElementById("yes1").onclick=function(){
     setTimeout(()=>{ okBtn.disabled=false; },5000);
 }
 
-/* PAGE2 OK */
 okBtn.onclick=function(){
     page2.classList.add("hidden");
     page3.classList.remove("hidden");
-    document.body.classList.add("clear-bg"); /* CLEAR BACKGROUND HERE */
+    document.body.classList.add("clear-bg");
     hearts();
 }
 
-/* PAGE3 NO */
 reject.onmouseover=reject.ontouchstart=function(){
     this.style.display="none";
     noTextAfterHover.style.display="block";
 }
 
-/* HEARTS */
 function hearts(){
     setInterval(()=>{
         const heart=document.createElement("div");
